@@ -11,7 +11,7 @@ export class Ship{
         this.hitCounter++;
     }
 
-    isSunk() {
+    get isSunk() {
         return this.hitCounter < this.length ? false : true;
     }
 }

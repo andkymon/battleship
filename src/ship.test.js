@@ -32,6 +32,6 @@ describe("hit()", () => {
 
 describe("isSunk()", () => {
     test("should return false when the number of hits are less than the ship's length", () => {
-        expect(testShip.isSunk()).toBe(false);
+        expect(testShip.isSunk).toBe(false);
     });
 })
