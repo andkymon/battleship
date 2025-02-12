@@ -4,7 +4,11 @@ export class Ship{
             throw new Error("Ship length invalid.");
         }
         this.length = length;
-        this.isHit = false;
+        this.hitCounter = 0;
         this.isSunk = false;
+    }
+
+    hit() {
+        this.hitCounter++;
     }
 }

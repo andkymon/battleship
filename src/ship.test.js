@@ -14,12 +14,20 @@ describe("constructor()", () => {
 
     test("should initialize a ship with required properties", () => {
         expect(testShip).toHaveProperty("length");
-        expect(testShip).toHaveProperty("isHit");
+        expect(testShip).toHaveProperty("hitCounter");
         expect(testShip).toHaveProperty("isSunk");
     });
 
-    test("should set isHit and isSunk to false by default", () => {
-        expect(testShip.isHit).toBe(false);
+    test("should set default values for isHit and isSunk", () => {
+        expect(testShip.hitCounter).toBe(0);  
         expect(testShip.isSunk).toBe(false);
+    })
+})
+
+describe("hit()", ()=> {
+    test("should increase number of hits in a ship", () => {
+        testShip.hit();
+        testShip.hit();
+        expect(testShip.hitCounter).toBe(2); 
     });
 })
