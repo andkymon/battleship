@@ -13,4 +13,15 @@ export class Gameboard {
         }
         return true;
     }
+
+    placeShip(ship, col, row, isVertical) {
+        const rowIncrement = isVertical ? 1 : 0;
+        const colIncrement = isVertical ? 0 : 1;
+
+        for (let i = 0; i < ship.length; i++) {
+            this.board[row][col] = ship;
+            row += rowIncrement;
+            col += colIncrement;
+        }
+    }
 }
