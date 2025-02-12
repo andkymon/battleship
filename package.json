@@ -1,7 +1,7 @@
 {
-  "name": "webpack-template",
+  "name": "battleship",
   "version": "1.0.0",
-  "description": "A simple Webpack template with separate configurations for development and production, designed for efficient asset bundling and easy project setup.",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
