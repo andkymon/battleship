@@ -1,0 +1,30 @@
+{
+  "name": "webpack-template",
+  "version": "1.0.0",
+  "description": "A simple Webpack template with separate configurations for development and production, designed for efficient asset bundling and easy project setup.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "html-webpack-plugin": "^5.6.3",
+    "prettier": "3.4.2",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.0"
+  },
+  "dependencies": {
+    "@jridgewell/gen-mapping": "^0.3.8"
+  }
+}
