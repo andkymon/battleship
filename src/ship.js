@@ -5,10 +5,13 @@ export class Ship{
         }
         this.length = length;
         this.hitCounter = 0;
-        this.isSunk = false;
     }
 
     hit() {
         this.hitCounter++;
+    }
+
+    isSunk() {
+        return this.hitCounter < this.length ? false : true;
     }
 }
