@@ -2,12 +2,10 @@ import { Ship } from "./ship";
 
 export class Gameboard {
     constructor() {
-        // TODO: Make getter
         this.board = new Array(10).fill(null).map(() => new Array(10).fill(null));
     }
 
-    // TODO: Make Private
-    isValidCoordinates(coordinates) {
+    #isValidCoordinates(coordinates) {
         for (const value of coordinates) {
             if (value > 9 || value < 0) {
                 return false;
@@ -21,12 +19,12 @@ export class Gameboard {
         const endCol = isVertical ? col : col + (ship.length - 1);
 
         // To prevent placing ships at invalid coordinates, check the validity of the last cell the ship will occupy
-        if (this.isValidCoordinates([endRow, endCol]) === false) {
+        if (this.#isValidCoordinates([endRow, endCol]) === false) {
             return "Out of bounds.";  
         }
 
         // To prevent placing ships at occupied spaces, the cells this ship will occupy and the cells surrounding it must be null
-        if (this.isSpaceOccupied(ship, row, col, isVertical) === false) {
+        if (this.#isSpaceOccupied(ship, row, col, isVertical) === false) {
             return "Space already occupied."; 
         }
 
@@ -42,7 +40,7 @@ export class Gameboard {
         }
     }
 
-    isSpaceOccupied(ship, row, col, isVertical) {
+    #isSpaceOccupied(ship, row, col, isVertical) {
         // For context, here's an example diagram of a 2-cell vertical ship (cells marked by o) with padding (cells marked by x):
 
         //  x x x  <- Top padding or surrounding cells (first iteration)

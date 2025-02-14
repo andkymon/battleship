@@ -3,7 +3,6 @@ import { Ship } from "./ship";
 
 const testGameboard = new Gameboard();
 
-
 describe("constructor()", () => {
     test("should initialize 10x10 2D array filled with null, representing the board", () => {
         const sampleArray = new Array(10).fill(null).map(() => new Array(10).fill(null));
