@@ -25,10 +25,15 @@ export class Gameboard {
             return "Out of bounds.";  
         }
 
+        // To prevent placing ships at occupied spaces, the cells this ship will occupy and the cells surrounding it must be null
+        if (this.isSpaceOccupied(ship, row, col, isVertical) === false) {
+            return "Space already occupied."; 
+        }
+
         for (let i = 0; i < ship.length; i++) {
             this.board[row][col] = ship;
 
-            // If vertical, increment row; If horizontal, increment column
+            // If vertical, go to next row on next iteration; If horizontal, go to next column on next iteration
             if (isVertical) {
                 row++;
             } else {
@@ -36,4 +41,38 @@ export class Gameboard {
             }
         }
     }
+
+    isSpaceOccupied(ship, row, col, isVertical) {
+        // For context, here's an example diagram of a 2-cell vertical ship (cells marked by o) with padding (cells marked by x):
+
+        //  x x x  <- Top padding or surrounding cells (first iteration)
+        //  x o x  <- Ship cells (o) with padding on both sides
+        //  x o x  <- Ship cells (o) with padding on both sides
+        //  x x x  <- Bottom padding or surrounding cells (last iteration)
+
+        // All these cells must be null before placing a ship
+
+        // If vertical, iteratively check 3 cells from left to right. If horizontal, iteratively check 3 cells from top to bottom. 
+        const rowConstant = isVertical ? 0 : 1;
+        const colConstant = isVertical ? 1 : 0;
+        
+        // Loop runs for ship.length + 2 as we have to also check the the ship's surrounding cells
+        for (let i = 0; i < ship.length + 2; i++) {
+            if (this.board[row - rowConstant][col - colConstant] !== null ||
+                this.board[row][col] !== null ||
+                this.board[row + rowConstant][col + colConstant] !== null
+            ) {
+                return false;
+            }
+
+            // If vertical, go to next row on next iteration; If horizontal, go to next column on next iteration
+            if (isVertical) {
+                row++;
+            } else {
+                col++;
+            }
+        }
+        return true;
+    }
 }
+

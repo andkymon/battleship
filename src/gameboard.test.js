@@ -31,5 +31,8 @@ describe("placeShip()", () => {
         expect(testGameboard.board[7]).toStrictEqual([null, null, null, null, null, testShip2, null, null, null, null]);
     });
 
-    //should not allow occupation of a placed ship's cells or adjacent cells
+    test("should not allow ship placement on occupied cells or cells surrounding a ship", () => { 
+        const testShip3 = new Ship(3);
+        expect(testGameboard.placeShip(testShip3, 6, 5, false)).toBe("Space already occupied.");
+    });
 });
