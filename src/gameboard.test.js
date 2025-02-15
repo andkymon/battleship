@@ -23,18 +23,18 @@ describe("placeShip()", () => {
     test("should not allow ship placement when a ship hits an invalid coordinate", () => {
         expect(testGameboard.placeShip(aircraftCarrier, 0, 9, false)).toBe("Out of bounds.");
     });
-
-    test("should place ship vertically when isVertical === true", () => { 
-        testGameboard.placeShip(aircraftCarrier, 1, 5, false);
-        expect(testGameboard.board[1]).toStrictEqual([null, null, null, null, null, aircraftCarrier, aircraftCarrier, aircraftCarrier, aircraftCarrier, aircraftCarrier]);
-    });
     
-    test("should place ship vertically when isVertical === false", () => { 
+    test("should place ship vertically when isVertical === true", () => { 
         testGameboard.placeShip(battleship, 5, 5, true);
         expect(testGameboard.board[5]).toStrictEqual([null, null, null, null, null, battleship, null, null, null, null]);
         expect(testGameboard.board[6]).toStrictEqual([null, null, null, null, null, battleship, null, null, null, null]);
         expect(testGameboard.board[7]).toStrictEqual([null, null, null, null, null, battleship, null, null, null, null]);
         expect(testGameboard.board[8]).toStrictEqual([null, null, null, null, null, battleship, null, null, null, null]);
+    });
+
+    test("should place ship horizontally when isVertical === false", () => { 
+        testGameboard.placeShip(aircraftCarrier, 1, 5, false);
+        expect(testGameboard.board[1]).toStrictEqual([null, null, null, null, null, aircraftCarrier, aircraftCarrier, aircraftCarrier, aircraftCarrier, aircraftCarrier]);
     });
 
     test("should not allow ship placement twice", () => { 
@@ -96,18 +96,33 @@ describe("receiveAttack()", () => {
     });
 });
 
-//when a ship is placed, must 
+describe("allShipsSunk()", () => {
+    test("returns false when a ship still stands", () => {
+        expect(testGameboard.allShipsSunk()).toBe(false);
+    });
+    test("returns true when all ships have sunken", () => {
+        // Sink Aircraft Carrier
+        testGameboard.receiveAttack(1, 5);
+        testGameboard.receiveAttack(1, 6);
+        testGameboard.receiveAttack(1, 7);
+        testGameboard.receiveAttack(1, 8);
+        testGameboard.receiveAttack(1, 9);
 
+        // Sink Cruiser
+        testGameboard.receiveAttack(0, 0);
+        testGameboard.receiveAttack(0, 1);
+        testGameboard.receiveAttack(0, 2);
 
-//gameboard placedships property
+        // Sink Submarine
+        testGameboard.placeShip(submarine, 9, 0, false);
+        testGameboard.receiveAttack(9, 0);
+        testGameboard.receiveAttack(9, 1);
+        testGameboard.receiveAttack(9, 2);
 
+        // Sink Destroyer
+        testGameboard.receiveAttack(9, 8);
+        testGameboard.receiveAttack(9, 9);
 
-//gameboard lost property
-//If a ship issunk, check all gameboard ships
-//if all ships isunk, lost property will be true
-
-
-//GAME
-//SHOULD NOT ALLOW ATTACKS WHEN SHIP HASNT BEEN PLACED
-//SHOULD TAKE TURNS
-let r;
+        expect(testGameboard.allShipsSunk()).toBe(true);
+    });
+});

@@ -112,4 +112,13 @@ export class Gameboard {
             this.board[row][col] = "O";
         }
     }
+
+    allShipsSunk() {
+        for (const ship of this.ships) {
+            if (ship.isSunk === false) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
