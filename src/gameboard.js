@@ -3,6 +3,11 @@ import { Ship } from "./ship";
 export class Gameboard {
     constructor() {
         this.board = new Array(10).fill(null).map(() => new Array(10).fill(null));
+        this.aircraftCarrier = new Ship(5);
+        this.battleship = new Ship(4);
+        this.submarine = new Ship(3);
+        this.cruiser = new Ship(3);
+        this.destroyer = new Ship(2);
     }
 
     placeShip(ship, row, col, isVertical) {

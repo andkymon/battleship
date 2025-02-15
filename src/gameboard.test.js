@@ -12,6 +12,14 @@ describe("constructor()", () => {
         const sampleArray = new Array(10).fill(null).map(() => new Array(10).fill(null));
         expect(testGameboard.board).toStrictEqual(sampleArray);
     });
+
+    test("should have properties representing each ship", () => {
+        expect(testGameboard.aircraftCarrier).toStrictEqual(new Ship(5));
+        expect(testGameboard.battleship).toStrictEqual(new Ship(4));
+        expect(testGameboard.submarine).toStrictEqual(new Ship(3));
+        expect(testGameboard.cruiser).toStrictEqual(new Ship(3));
+        expect(testGameboard.destroyer).toStrictEqual(new Ship(2));
+    });
 });
 
 describe("placeShip()", () => {
@@ -80,5 +88,15 @@ describe("receiveAttack()", () => {
     });
 });
 
-//If ship issunk, check all gameboard ships
-//ship must have placed property when placed
+//constructor should create properties for each ships
+
+//when a ship is placed, must 
+
+
+//gameboard placedships property
+
+
+//gameboard lost property
+//If a ship issunk, check all gameboard ships
+//if all ships isunk, lost property will be true
+
