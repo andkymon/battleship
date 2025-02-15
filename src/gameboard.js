@@ -20,6 +20,12 @@ export class Gameboard {
             return "Space already occupied."; 
         }
 
+        // To prevent placing ship twice
+        if (ship.isPlaced === true) {
+            return "Ship already placed."
+        }
+        ship.isPlaced = true;
+
         for (let i = 0; i < ship.length; i++) {
             this.board[row][col] = ship;
 
