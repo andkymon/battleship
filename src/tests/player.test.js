@@ -1,5 +1,5 @@
-import { Player } from "./player";
-import { Gameboard } from "./gameboard";
+import { Player } from "../logic/player";
+import { Gameboard } from "../logic/gameboard";
 
 test("should have ships property, an array of all ships", () => {
     const testPlayer = new Player();

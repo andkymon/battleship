@@ -1,5 +1,5 @@
-import { Gameboard } from "./gameboard";
-import { Ship } from "./ship";
+import { Gameboard } from "../logic/gameboard";
+import { Ship } from "../logic/ship";
 
 describe("constructor()", () => {
     let testGameboard;
