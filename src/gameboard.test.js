@@ -13,12 +13,8 @@ describe("constructor()", () => {
         expect(testGameboard.board).toStrictEqual(sampleArray);
     });
 
-    test("should have properties representing each ship", () => {
-        expect(testGameboard.aircraftCarrier).toStrictEqual(new Ship(5));
-        expect(testGameboard.battleship).toStrictEqual(new Ship(4));
-        expect(testGameboard.submarine).toStrictEqual(new Ship(3));
-        expect(testGameboard.cruiser).toStrictEqual(new Ship(3));
-        expect(testGameboard.destroyer).toStrictEqual(new Ship(2));
+    test("should have ships property, an array of all ships", () => {
+        expect(testGameboard.ships).toStrictEqual([new Ship(5), new Ship(4), new Ship(3), new Ship(3), new Ship(2)]);
     });
 });
 
