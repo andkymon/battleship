@@ -34,4 +34,10 @@ describe("placeShip()", () => {
         const testShip3 = new Ship(3);
         expect(testGameboard.placeShip(testShip3, 6, 5, false)).toBe("Space already occupied.");
     });
+
+    test("should allow ship placement on edges", () => { 
+        const testShip4 = new Ship(3);
+        testGameboard.placeShip(testShip4, 0, 0, false);
+        expect(testGameboard.board[0]).toStrictEqual([testShip, testShip, testShip, null, null,null, null, null, null, null]);
+    });
 });

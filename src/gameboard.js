@@ -54,11 +54,27 @@ export class Gameboard {
         const rowConstant = isVertical ? 0 : 1;
         const colConstant = isVertical ? 1 : 0;
         
+        // Start checking from one cell before ship's first cell (The x x x cells)
+        if (isVertical) {
+            row--;
+        } else {
+            col--;
+        }
+
         // Loop runs for ship.length + 2 as we have to also check the the ship's surrounding cells
+        // Each cell will only be checked if not out of bounds, will skip if it is
         for (let i = 0; i < ship.length + 2; i++) {
-            if (this.board[row - rowConstant][col - colConstant] !== null ||
-                this.board[row][col] !== null ||
-                this.board[row + rowConstant][col + colConstant] !== null
+            // Left of current cell (vertical), Top of current cell (horizontal)
+            if ((this.#isValidCoordinates([row - rowConstant, col - colConstant]) &&
+                this.board[row - rowConstant][col - colConstant] !== null) ||
+
+                // Middle cell (current cell)
+                (this.#isValidCoordinates([row, col]) &&
+                this.board[row][col] !== null) ||
+
+                // Right of current cell (vertical), Bottom of current cell (horizontal)
+                (this.#isValidCoordinates([row + rowConstant, col + colConstant]) &&
+                this.board[row + rowConstant][col + colConstant] !== null)
             ) {
                 return false;
             }
@@ -74,3 +90,4 @@ export class Gameboard {
     }
 }
 
+//avoid negative access
