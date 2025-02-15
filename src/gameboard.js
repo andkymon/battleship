@@ -4,6 +4,7 @@ export class Gameboard {
     constructor() {
         this.board = new Array(10).fill(null).map(() => new Array(10).fill(null));
         this.ships= [new Ship(5), new Ship(4), new Ship(3), new Ship(3), new Ship(2)];
+        this.placedShipsCounter = 0;
     }
 
     placeShip(ship, row, col, isVertical) {
@@ -25,6 +26,7 @@ export class Gameboard {
             return "Ship already placed."
         }
         ship.isPlaced = true;
+        this.placedShipsCounter++;
 
         for (let i = 0; i < ship.length; i++) {
             this.board[row][col] = ship;
@@ -97,6 +99,10 @@ export class Gameboard {
     }
 
     receiveAttack(row, col) {
+        if (this.placedShipsCounter < 5) {
+            return "All ships must be placed before attacking."
+        }
+
         if (this.#isValidCoordinates([row, col]) === false) {
             return "Out of bounds.";  
         }

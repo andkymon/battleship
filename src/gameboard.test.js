@@ -62,12 +62,30 @@ describe("placeShip()", () => {
     });
 });
 
+describe("receiveAttack() without ships placed", () => {
+    let testGameboard;
+
+    beforeEach(() => {
+        testGameboard = new Gameboard(); // No ships placed yet
+    });
+
+    test("receiveAttack() should not work when no ships are placed", () => {
+        expect(testGameboard.receiveAttack(1, 1)).toBe("All ships must be placed before attacking.");
+    });
+});
+
 describe("receiveAttack()", () => {
-    let testGameboard, destroyer;
+    let testGameboard, aircraftCarrier, battleship, submarine, cruiser, destroyer;
 
     beforeEach(() => {
         testGameboard = new Gameboard();
-        destroyer = testGameboard.ships[4];
+        [aircraftCarrier, battleship, submarine, cruiser, destroyer] = testGameboard.ships;
+
+        testGameboard.placeShip(aircraftCarrier, 0, 0, false);
+        testGameboard.placeShip(battleship, 2, 0, false);
+        testGameboard.placeShip(submarine, 4, 0, false);
+        testGameboard.placeShip(cruiser, 6, 0, false);
+        testGameboard.placeShip(destroyer, 8, 0, false);
     })
     
     test("should not allow attack on an invalid coordinate", () => {
@@ -84,9 +102,8 @@ describe("receiveAttack()", () => {
     });
 
     test("cell displays 'O' if attack hits a ship", () => {
-        testGameboard.placeShip(destroyer, 9, 8, false);
-        testGameboard.receiveAttack(9, 9);
-        expect(testGameboard.board[9]).toStrictEqual([null, null, null, null, null, null, null, null, destroyer, "O"]);
+        testGameboard.receiveAttack(8, 0);
+        expect(testGameboard.board[8]).toStrictEqual(["O", destroyer, null, null, null, null, null, null, null, null]);
     });
 
     test("should not allow attacks on attacked cells", () => {
@@ -95,19 +112,18 @@ describe("receiveAttack()", () => {
     });
     
     test("should increment a ship's hitCounter when hit", () => {
-        testGameboard.placeShip(destroyer, 9, 8, false);
-        testGameboard.receiveAttack(9, 8);
+        testGameboard.receiveAttack(8, 0);
         expect(destroyer.hitCounter).toStrictEqual(1);
-        testGameboard.receiveAttack(9, 9);
+        testGameboard.receiveAttack(8, 1);
         expect(destroyer.hitCounter).toStrictEqual(2);
     });
 
     test("ship should be sunk when all cells are hit", () => {
-        testGameboard.placeShip(destroyer, 9, 8, false);
-        testGameboard.receiveAttack(9, 8);
-        testGameboard.receiveAttack(9, 9);
+        testGameboard.receiveAttack(8, 0);
+        testGameboard.receiveAttack(8, 1);
+
         expect(destroyer.isSunk).toStrictEqual(true);
-        expect(testGameboard.board[9]).toStrictEqual([null, null, null, null, null, null, null, null, "O", "O"]);
+        expect(testGameboard.board[8]).toStrictEqual(["O", "O", null, null, null, null, null, null, null, null]);
     });
 });
 
