@@ -70,7 +70,14 @@ describe("receiveAttack()", () => {
         expect(testShip2.hitCounter).toStrictEqual(2);
     });
 
-    //if all ship cells are hit, ship issunk must return true, with hitcounter matching its length
+    test("ship should be sunk when all cells are hit", () => {
+        testGameboard.receiveAttack(5, 5);
+        expect(testShip2.isSunk).toStrictEqual(true);
+
+        expect(testGameboard.board[5]).toStrictEqual(["X", "X", null, null, null, "O", null, null, null, null]);
+        expect(testGameboard.board[6]).toStrictEqual([null, null, null, null, null, "O", null, null, null, null]);
+        expect(testGameboard.board[7]).toStrictEqual([null, null, null, null, null, "O", null, null, null, null]);
+    });
 });
 
 //If ship issunk, check all gameboard ships
