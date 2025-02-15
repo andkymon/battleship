@@ -36,8 +36,23 @@ describe("placeShip()", () => {
     });
 
     test("should allow ship placement on edges", () => { 
-        const testShip4 = new Ship(3);
+        const testShip4 = new Ship(4);
         testGameboard.placeShip(testShip4, 0, 0, false);
-        expect(testGameboard.board[0]).toStrictEqual([testShip, testShip, testShip, null, null,null, null, null, null, null]);
+        expect(testGameboard.board[0]).toStrictEqual([testShip4, testShip4, testShip4, testShip4, null, null, null, null, null, null]);
     });
 });
+
+describe("receiveAttack()", () => {
+    test("should not allow attack on an invalid coordinate", () => {
+        expect(testGameboard.receiveAttack(-1, -1)).toBe("Out of bounds.");
+        expect(testGameboard.receiveAttack(10, 10)).toBe("Out of bounds.");
+    });
+    //validate coordinates
+    //if attacked cell is null place X
+    //if attacked cell is not null, place O
+    //if attacked cell is not null, that ships hitCounter must increase
+    //if all ship cells are hit, ship issunk must return true, with hitcounter matching its length
+});
+
+//If ship issunk, check all gameboard ships
+//ship must have placed property when placed

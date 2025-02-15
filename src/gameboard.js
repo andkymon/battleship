@@ -5,15 +5,6 @@ export class Gameboard {
         this.board = new Array(10).fill(null).map(() => new Array(10).fill(null));
     }
 
-    #isValidCoordinates(coordinates) {
-        for (const value of coordinates) {
-            if (value > 9 || value < 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     placeShip(ship, row, col, isVertical) {
         const endRow = isVertical ? row + (ship.length - 1) : row;
         const endCol = isVertical ? col : col + (ship.length - 1);
@@ -38,6 +29,15 @@ export class Gameboard {
                 col++;
             }
         }
+    }
+
+    #isValidCoordinates(coordinates) {
+        for (const value of coordinates) {
+            if (value > 9 || value < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     #isSpaceOccupied(ship, row, col, isVertical) {
@@ -88,6 +88,10 @@ export class Gameboard {
         }
         return true;
     }
-}
 
-//avoid negative access
+    receiveAttack(row, col) {
+        if (this.#isValidCoordinates([row, col]) === false) {
+            return "Out of bounds.";  
+        }
+    }
+}
