@@ -43,11 +43,15 @@ describe("placeShip()", () => {
 
     test("should not allow ship placement on occupied cells or cells surrounding a ship", () => { 
         expect(testGameboard.placeShip(submarine, 6, 5, false)).toBe("Space already occupied.");
+        expect(testGameboard.placeShip(destroyer, 9, 3, false)).toBe("Space already occupied.");
     });
 
     test("should allow ship placement on edges", () => { 
         testGameboard.placeShip(cruiser, 0, 0, false);
         expect(testGameboard.board[0]).toStrictEqual([cruiser, cruiser, cruiser, null, null, null, null, null, null, null]);
+
+        testGameboard.placeShip(destroyer, 9, 8, false);
+        expect(testGameboard.board[9]).toStrictEqual([null, null, null, null, null, null, null, null, destroyer, destroyer]);
     });
 });
 
@@ -59,10 +63,10 @@ describe("receiveAttack()", () => {
     
     test("cell displays 'X' if attack misses", () => {
         testGameboard.receiveAttack(5, 0);
-        expect(testGameboard.board[5]).toStrictEqual(["X", null, null, null, null, testShip2, null, null, null, null]);
+        expect(testGameboard.board[5]).toStrictEqual(["X", null, null, null, null, battleship, null, null, null, null]);
 
         testGameboard.receiveAttack(5, 1);
-        expect(testGameboard.board[5]).toStrictEqual(["X", "X", null, null, null, testShip2, null, null, null, null]);
+        expect(testGameboard.board[5]).toStrictEqual(["X", "X", null, null, null, battleship, null, null, null, null]);
     });
 
     test("cell displays 'O' if attack hits a ship", () => {
@@ -75,24 +79,22 @@ describe("receiveAttack()", () => {
     });
     
     test("should increment a ship's hitCounter when hit", () => {
-        expect(testShip2.hitCounter).toStrictEqual(1);
+        expect(battleship.hitCounter).toStrictEqual(1);
         testGameboard.receiveAttack(7, 5);
-        expect(testShip2.hitCounter).toStrictEqual(2);
+        expect(battleship.hitCounter).toStrictEqual(2);
     });
 
     test("ship should be sunk when all cells are hit", () => {
         testGameboard.receiveAttack(5, 5);
-        expect(testShip2.isSunk).toStrictEqual(true);
+        testGameboard.receiveAttack(8, 5);
+        expect(battleship.isSunk).toStrictEqual(true);
 
         expect(testGameboard.board[5]).toStrictEqual(["X", "X", null, null, null, "O", null, null, null, null]);
         expect(testGameboard.board[6]).toStrictEqual([null, null, null, null, null, "O", null, null, null, null]);
         expect(testGameboard.board[7]).toStrictEqual([null, null, null, null, null, "O", null, null, null, null]);
+        expect(testGameboard.board[8]).toStrictEqual([null, null, null, null, null, "O", null, null, null, null]);
     });
 });
-
-let x;
-
-//constructor should create properties for each ships
 
 //when a ship is placed, must 
 
