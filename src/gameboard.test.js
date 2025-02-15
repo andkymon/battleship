@@ -64,8 +64,12 @@ describe("receiveAttack()", () => {
         expect(testGameboard.receiveAttack(6, 5)).toStrictEqual("Cell already hit.");
     });
     
+    test("should increment a ship's hitCounter when hit", () => {
+        expect(testShip2.hitCounter).toStrictEqual(1);
+        testGameboard.receiveAttack(7, 5);
+        expect(testShip2.hitCounter).toStrictEqual(2);
+    });
 
-    //if attacked cell is not null, that ships hitCounter must increase
     //if all ship cells are hit, ship issunk must return true, with hitcounter matching its length
 });
 
