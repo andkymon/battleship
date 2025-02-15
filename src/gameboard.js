@@ -93,5 +93,11 @@ export class Gameboard {
         if (this.#isValidCoordinates([row, col]) === false) {
             return "Out of bounds.";  
         }
+
+        this.board[row][col] = this.board[row][col] === null ? "X" : "O";
+
+        if (this.board[row][col] === "X" || this.board[row][col] === "O") {
+            return "Cell already hit.";  
+        }
     }
 }
