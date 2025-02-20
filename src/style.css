@@ -1,0 +1,81 @@
+/*
+Josh's Custom CSS Reset
+https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+}
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+img, picture, video, canvas, svg {
+    display: inline-block;
+    max-width: 100%;
+}
+input, button, textarea, select {
+    font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+p {
+    text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+button {
+    line-height: 1;
+}
+button:hover {
+    cursor: pointer;
+}
+
+body {
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+#game-message {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.grid-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.grid {
+    height: 402px;
+    width: 402px;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.grid-square {
+    border: 1px solid black;
+}
+
+.direction {
+    text-align: center;
+}
+
+.clicked {
+    background-color: green;
+}
+
+.hovered {
+    background-color: blue;
+}
