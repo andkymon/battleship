@@ -91,3 +91,8 @@ h1 {
 .computer.grid-square:hover {
     filter: brightness(75%);
 }
+
+.computer.grid.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
