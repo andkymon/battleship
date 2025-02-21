@@ -86,7 +86,7 @@ export function startShipPlacement(human) {
     currentShip = human.gameboard.ships[currentShipIndex];
   }
 
-  function allShipsPlaced(){
+  function allShipsPlaced() {
     if (currentShipIndex === 4) {
       disableGridSquares();
 
@@ -106,13 +106,16 @@ export function startShipPlacement(human) {
   let hoveredColIndex;
 
   // Allow ship rotation when "r" key is pressed
-  document.addEventListener("keydown", (event) => {
+  document.removeEventListener("keydown", handleKeyPress);
+  document.addEventListener("keydown", handleKeyPress);
+
+  function handleKeyPress(event) {
     if (event.key === "r") {
       isVertical = !isVertical;
+      clearHoveredStyling();
+      applyHoveredStyling(hoveredRowIndex, hoveredColIndex);
     }
-    clearHoveredStyling();
-    applyHoveredStyling(hoveredRowIndex, hoveredColIndex);
-  });
+  }
 
   function applyHoveredStyling(rowNumber, colNumber) {
     // Used by "r" click event listener to determine which square is currently being hovered
