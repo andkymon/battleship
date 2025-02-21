@@ -21,7 +21,7 @@ const restartButton = document.querySelector("#restart");
 restartButton.addEventListener("click", gameStart);
 
 function displayShipPlacementPage() {
-  document.querySelector("#ship-placement-page").style.display = "flex";
+  document.querySelector("#ship-placement-page").style.display = "block";
   document.querySelector("#battle-page").style.display = "none";
   document.querySelector("#win-page").style.display = "none";
   document.querySelector("#title").style.display = "block";
