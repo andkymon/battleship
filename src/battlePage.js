@@ -1,5 +1,6 @@
 let human;
 let computer;
+let availableCoordinates;
 
 export function startBattle(player1, player2) {
   human = player1;
@@ -7,6 +8,9 @@ export function startBattle(player1, player2) {
 
   displayGameMessage("");
   generateGridSquares();
+
+  // Used to keep track of coordinates the computer has not selected yet
+  availableCoordinates = createCoordinatesObject();
 }
 
 function displayGameMessage(string) {
@@ -31,6 +35,19 @@ function generateGridSquares() {
       computerGrid.appendChild(computerGridSquare);
     }
   }
+}
+
+function createCoordinatesObject() {
+  // Object with index as key, and an object with row and column properties as the value
+  // Did not use array so their index stays the same even if other elements are deleted
+  const BOARD_SIZE = 10 * 10; // Board is a 10x10 grid.
+  const coordinates = {};
+
+  for (let i = 0; i < BOARD_SIZE; i++) {
+    coordinates[i] = { row: Math.floor(i / 10), col: i % 10 };
+  }
+
+  return coordinates;
 }
 
 function createHumanGridSquare(rowNumber, colNumber) {
@@ -92,8 +109,6 @@ function applyHitStyling(player, gridSquare) {
     player.gameboard.board[row][col] === "X" ? "blue" : "red";
 }
 
-// Remove previous event listener before adding new one
-document.removeEventListener("computerTurn", attackHuman);
 document.addEventListener("computerTurn", attackHuman);
 
 function attackHuman() {
@@ -133,18 +148,4 @@ function selectRandomCoordinates() {
   return availableCoordinates[randomKey];
 }
 
-const availableCoordinates = createCoordinatesObject();
 
-function createCoordinatesObject() {
-  // Object with index as key, and an object with row and column properties as the value
-  // Did not use array so their index stays the same even if other elements are deleted
-  const BOARD_SIZE = 10 * 10; // Board is a 10x10 grid.
-  const coordinates = {};
-
-  for (let i = 0; i < BOARD_SIZE; i++) {
-    coordinates[i] = {};
-    coordinates[i] = { row: Math.floor(i / 10), col: i % 10 };
-  }
-
-  return coordinates;
-}
