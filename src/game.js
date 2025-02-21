@@ -18,9 +18,8 @@ export function gameStart() {
         battlePage.style.display = "flex";
 
         placeShipsRandomly(computer);
-        console.log(computer.gameboard.board);
+        startBattle(human, computer);
     });
-
 };
 
 
