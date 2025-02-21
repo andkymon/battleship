@@ -81,9 +81,13 @@ h1 {
     background-color: blue;
 }
 
-#battle-page{
+#battle-page {
     display: none; /* Enabled after ship placement is done */
     flex-wrap: wrap;
     justify-content: center;
     gap: 32px;
+}
+
+.computer.grid-square:hover {
+    filter: brightness(75%);
 }
