@@ -3,30 +3,22 @@ import { startShipPlacement } from "./shipPlacementPage.js";
 import { placeShipsRandomly } from "./placeComputerShips.js";
 import { startBattle } from "./battlePage.js";
 
+let human;
+let computer;
+
 export function gameStart() {
-  const human = new Player();
-  const computer = new Player();
+  human = new Player();
+  computer = new Player();
 
   displayShipPlacementPage();
   startShipPlacement(human);
-
-  const handleAllShipsPlaced = () => {
-    displayBattlePage();
-    placeShipsRandomly(computer);
-    startBattle(human, computer);
-  };
-
-  // Remove any previous event listeners before adding new ones
-  document.removeEventListener("allShipsPlaced", handleAllShipsPlaced);
-  document.removeEventListener("gameEnd", displayEndPage);
-
-  document.addEventListener("allShipsPlaced", handleAllShipsPlaced);
-  document.addEventListener("gameEnd", displayEndPage);
-
-  const restartButton = document.querySelector("#restart");
-  restartButton.removeEventListener("click", gameStart);
-  restartButton.addEventListener("click", gameStart);
 }
+
+document.addEventListener("allShipsPlaced", handleAllShipsPlaced);
+document.addEventListener("gameEnd", handleGameEnd);
+
+const restartButton = document.querySelector("#restart");
+restartButton.addEventListener("click", gameStart);
 
 function displayShipPlacementPage() {
     document.querySelector("#ship-placement-page").style.display = "flex";
@@ -34,6 +26,17 @@ function displayShipPlacementPage() {
     document.querySelector("#win-page").style.display = "none";
     document.querySelector("#title").style.display = "block";
     document.querySelector("#game-message").style.display = "block";
+}
+
+function handleAllShipsPlaced() {
+  displayBattlePage();
+  placeShipsRandomly(computer);
+  startBattle(human, computer);
+}
+
+function handleGameEnd(event) {
+  displayEndPage();
+  document.querySelector("#win-page h1").textContent = event.detail;
 }
 
 function displayBattlePage() {
