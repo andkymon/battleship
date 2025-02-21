@@ -53,7 +53,6 @@ function createCoordinatesObject() {
   const coordinates = {};
 
   for (let i = 0; i < BOARD_SIZE; i++) {
-    coordinates[i] = {};
     coordinates[i] = { row: Math.floor(i / 10), col: i % 10 };
   }
 
