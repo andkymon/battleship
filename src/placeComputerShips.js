@@ -81,46 +81,30 @@ function getAdjacentSquaresKeys(ship, row, col, isVertical) {
   const colStep = isVertical ? 1 : 0;
 
   // Start checking from one cell before ship's first cell (The x x x cells)
-  if (isVertical) {
-    row--;
-  } else {
-    col--;
-  }
+  if (isVertical) row--; else col--;
 
   const adjacentSquaresKeys = [];
   // Loop runs for ship.length + 2 as we have to also check the the ship's surrounding cells
   // Each cell will only be checked if not out of bounds, will skip if it is
   for (let i = 0; i < ship.length + 2; i++) {
-    // Left of current cell (vertical), Top of current cell (horizontal)
-    if (isValidCoordinates([row - rowStep, col - colStep])) {
-      adjacentSquaresKeys.push("" + (row - rowStep) + (col - colStep));
-    }
+    addValidCoordinate(adjacentSquaresKeys, row - rowStep, col - colStep); // Left (vertical) / Top (horizontal)
+    addValidCoordinate(adjacentSquaresKeys, row, col); // Current cell
+    addValidCoordinate(adjacentSquaresKeys, row + rowStep, col + colStep); // Right (vertical) / Bottom (horizontal)
 
-    // Middle cell (current cell)
-    if (isValidCoordinates([row, col])) {
-      adjacentSquaresKeys.push("" + row + col);
-    }
-
-    // Right of current cell (vertical), Bottom of current cell (horizontal)
-    if (isValidCoordinates([row + rowStep, col + colStep])) {
-      adjacentSquaresKeys.push("" + (row + rowStep) + (col + colStep));
-    }
+    row += isVertical ? 1 : 0;
 
     // If vertical, go to next row on next iteration; If horizontal, go to next column on next iteration
-    if (isVertical) {
-      row++;
-    } else {
-      col++;
-    }
+    if (isVertical) row++; else col++;
   }
   return adjacentSquaresKeys;
 }
 
-function isValidCoordinates(coordinates) {
-  for (const value of coordinates) {
-    if (value > 9 || value < 0) {
-      return false;
-    }
+function addValidCoordinate(keysArray, row, col) {
+  if (isValidCoordinates([row, col])) {
+    keysArray.push("" + row + col);
   }
-  return true;
+}
+
+function isValidCoordinates(coordinates) {
+  return coordinates.every(value => value >= 0 && value <= 9);
 }
