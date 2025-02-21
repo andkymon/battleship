@@ -18,6 +18,10 @@ function generateGridSquares() {
   const humanGrid = document.querySelector(".human.grid");
   const computerGrid = document.querySelector(".computer.grid");
 
+  // Clear the grid
+  humanGrid.replaceChildren();
+  computerGrid.replaceChildren();
+
   for (const [rowNumber, row] of human.gameboard.board.entries()) {
     for (const colNumber of row.keys()) {
       const humanGridSquare = createHumanGridSquare(rowNumber, colNumber);
@@ -80,26 +84,30 @@ function attackComputer(computerGridSquare) {
 
 function applyHitStyling(player, gridSquare) {
   // dataset property is an object containing an element's custom data attributes
-  const { row, column } = gridSquare.dataset;
+  const { row, col } = gridSquare.dataset;
 
   // Blue on miss, red on hit
   gridSquare.style.backgroundColor =
-    player.gameboard.board[row][column] === "X" ? "blue" : "red";
+    player.gameboard.board[row][col] === "X" ? "blue" : "red";
 }
 
-document.addEventListener("computerTurn", () => {
+// Remove previous event listener before adding new one
+document.removeEventListener("computerTurn", attackHuman);
+document.addEventListener("computerTurn", attackHuman);
+
+function attackHuman() {
   // Disable human clicks
   const computerGrid = document.querySelector(".computer.grid");
   computerGrid.classList.add("disabled");
 
   // Select random coordinates from selection pool, and attack
   const randomCoordinates = selectRandomCoordinates();
-  const { row, column } = randomCoordinates;
-  human.gameboard.receiveAttack(row, column);
+  const { row, col, key } = randomCoordinates;
+  human.gameboard.receiveAttack(row, col);
 
   // Square will be blue on miss, red on hit
   const humanGridSquare = document.querySelector(
-    `.human.grid-square[data-row="${row}"][data-col="${column}"]`,
+    `.human.grid-square[data-row="${row}"][data-col="${col}"]`,
   );
   applyHitStyling(human, humanGridSquare);
 
@@ -110,11 +118,11 @@ document.addEventListener("computerTurn", () => {
   }
 
   // If not, remove from selection pool so the coordinates do not get selected again
-  delete availableCoordinates[randomCoordinates.key];
+  delete availableCoordinates[key];
 
   // Re-enable human clicks for human's turn
   computerGrid.classList.remove("disabled");
-});
+}
 
 function selectRandomCoordinates() {
   const keys = Object.keys(availableCoordinates);
