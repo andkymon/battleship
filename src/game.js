@@ -1,6 +1,8 @@
 
 import { Player } from "./logic/player.js";
 import { startShipPlacement } from "./shipPlacementPage.js";
+import { placeShipsRandomly } from "./placeComputerShips.js";
+import { startBattle } from "./battlePage.js";
 
 export function gameStart() {
     const human = new Player();
@@ -14,7 +16,11 @@ export function gameStart() {
 
         shipPlacementPage.style.display = "none";
         battlePage.style.display = "flex";
+
+        placeShipsRandomly(computer);
+        console.log(computer.gameboard.board);
     });
+
 };
 
 
