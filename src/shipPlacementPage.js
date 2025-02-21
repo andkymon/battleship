@@ -20,7 +20,7 @@ export function startShipPlacement(human) {
   gameMessage.textContent = `Place your ${shipNames[currentShipIndex]}`;
 
   // Generate grid squares
-  const grid = document.querySelector(".grid");
+  const grid = document.querySelector("#ship-placement-page .grid");
   for (const [rowNumber, row] of human.gameboard.board.entries()) {
     for (const colNumber of row.keys()) {
       const gridSquare = document.createElement("button");
