@@ -96,3 +96,9 @@ h1 {
     pointer-events: none;
     opacity: 0.5;
 }
+
+#win-page {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
