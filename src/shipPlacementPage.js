@@ -42,6 +42,7 @@ export function startShipPlacement(human) {
           return;
         }
         applyClickedStyling(rowNumber, colNumber);
+        if (allShipsPlaced()) return;
         updateCurrentShip();
       });
 
@@ -80,6 +81,18 @@ export function startShipPlacement(human) {
     currentShipIndex++;
     gameMessage.textContent = `Place your ${shipNames[currentShipIndex]}`;
     currentShip = human.gameboard.ships[currentShipIndex];
+  }
+
+  function allShipsPlaced(){
+    if (currentShipIndex === 4) {
+      disableGridSquares();
+
+      // Announce that this page is done
+      const allShipsPlaced = new Event("allShipsPlaced");
+      document.dispatchEvent(allShipsPlaced);
+      return true;
+    }
+    return false;
   }
 
   // Shared by style applying and clearing functions
@@ -132,6 +145,13 @@ export function startShipPlacement(human) {
       hoveredGridSquare.classList.remove("hovered");
     }
     hoveredGridSquares = [];
+  }
+
+  function disableGridSquares() {
+    const gridSquares = document.querySelectorAll(".grid-square");
+    for (const gridSquare of gridSquares) {
+      gridSquare.disabled = true;
+    }
   }
 }
 
