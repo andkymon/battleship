@@ -52,7 +52,8 @@ h1 {
 
 .grid-wrapper {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .grid {
@@ -78,4 +79,11 @@ h1 {
 
 .hovered {
     background-color: blue;
+}
+
+#battle-page{
+    display: none; /* Enabled after ship placement is done */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
 }
