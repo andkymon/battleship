@@ -154,7 +154,3 @@ export function startShipPlacement(human) {
     }
   }
 }
-
-//document event listener for allshipsplaced
-//dispatch event for next page
-//next page
