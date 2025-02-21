@@ -129,7 +129,9 @@ function attackHuman() {
 
   // Check if computer won
   if (human.gameboard.allShipsSunk() === true) {
-    const gameEndEvent = new CustomEvent("gameEnd", { detail: "Computer wins." });
+    const gameEndEvent = new CustomEvent("gameEnd", {
+      detail: "Computer wins.",
+    });
     document.dispatchEvent(gameEndEvent);
     return;
   }
@@ -147,5 +149,3 @@ function selectRandomCoordinates() {
   availableCoordinates[randomKey].key = randomKey;
   return availableCoordinates[randomKey];
 }
-
-

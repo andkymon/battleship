@@ -81,7 +81,8 @@ function getAdjacentSquaresKeys(ship, row, col, isVertical) {
   const colStep = isVertical ? 1 : 0;
 
   // Start checking from one cell before ship's first cell (The x x x cells)
-  if (isVertical) row--; else col--;
+  if (isVertical) row--;
+  else col--;
 
   const adjacentSquaresKeys = [];
   // Loop runs for ship.length + 2 as we have to also check the the ship's surrounding cells
@@ -94,17 +95,18 @@ function getAdjacentSquaresKeys(ship, row, col, isVertical) {
     row += isVertical ? 1 : 0;
 
     // If vertical, go to next row on next iteration; If horizontal, go to next column on next iteration
-    if (isVertical) row++; else col++;
+    if (isVertical) row++;
+    else col++;
   }
   return adjacentSquaresKeys;
 }
 
 function addValidCoordinate(keysArray, row, col) {
-  if (isValidCoordinates([row, col])) {
-    keysArray.push("" + row + col);
+  if (isValidCoordinate(row, col)) {
+    keysArray.push(`${row}${col}`);
   }
 }
 
-function isValidCoordinates(coordinates) {
-  return coordinates.every(value => value >= 0 && value <= 9);
+function isValidCoordinate(row, col) {
+  return row >= 0 && row <= 9 && col >= 0 && col <= 9;
 }
