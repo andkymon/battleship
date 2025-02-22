@@ -27,7 +27,7 @@ document.addEventListener("gameEnd", (event) => {
 });
 
 // Button to restart the game
-document.querySelector("button #restart").addEventListener("click", gameStart);
+document.querySelector("#restart").addEventListener("click", gameStart);
 
 function displayShipPlacementPage() {
   // Switch from end page (if restarting) to ship placement page
