@@ -1,6 +1,6 @@
 import { Player } from "./logic/player.js";
 import { startShipPlacement } from "./shipPlacementPage.js";
-import { placeShipsRandomly } from "./placeComputerShips.js";
+import { placeShipsRandomly } from "./placeShipsRandomly.js";
 import { startBattle } from "./battlePage.js";
 
 // Declared here as it is used by event listeners
