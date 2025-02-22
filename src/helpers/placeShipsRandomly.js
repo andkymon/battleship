@@ -1,4 +1,6 @@
 import { isValidCoordinates } from "./isValidCoordinates";
+import { createCoordinatesObject } from "./createCoordinatesObject";
+import { selectRandomCoordinates } from "./selectRandomCoordinates";
 
 export function placeShipsRandomly(player) {
   // Updated on successful ship placement
@@ -46,26 +48,6 @@ export function placeShipsRandomly(player) {
     currentShipIndex++;
     currentShip = player.gameboard.ships[currentShipIndex];
   }
-}
-
-function createCoordinatesObject() {
-  // Object with index as key, and an object with row and column properties as the value
-  // Did not use array so their index stays the same even if other elements are deleted
-  const BOARD_SIZE = 100; // Board is a 10x10 grid
-  const coordinates = {};
-
-  for (let i = 0; i < BOARD_SIZE; i++) {
-    coordinates[i] = { row: Math.floor(i / 10), col: i % 10 };
-  }
-
-  return coordinates;
-}
-
-function selectRandomCoordinates(coordinatesObject) {
-  const keys = Object.keys(coordinatesObject);
-  const randomKey = keys[Math.floor(Math.random() * keys.length)];
-  coordinatesObject[randomKey].key = randomKey;
-  return coordinatesObject[randomKey];
 }
 
 function getAdjacentSquaresKeys(ship, row, col, isVertical) {
