@@ -8,7 +8,7 @@ export function placeShipsRandomly(player) {
 
   // Place ships
   while (currentShip !== undefined) {
-    // Randomly assign as true or false
+    // Randomly assign ship orientation
     let isVertical = Math.random() < 0.5;
 
     // Due to length and orientation differences, each ship's valid and invalid coordinates would not be the same
@@ -16,9 +16,9 @@ export function placeShipsRandomly(player) {
 
     // Place ships
     let selectedCoordinates;
-    let result = null;
-
-    while (result !== undefined) {
+    let result;
+   
+    do {
       selectedCoordinates = selectRandomCoordinates(
         shipSpecificValidCoordinates,
       );
@@ -30,7 +30,7 @@ export function placeShipsRandomly(player) {
       );
       // Remove from pool of valid coordinates once attempted
       delete shipSpecificValidCoordinates[selectedCoordinates.key];
-    }
+    } while (result !== undefined)
 
     const adjacentSquaresKeys = getAdjacentSquaresKeys(
       currentShip,
