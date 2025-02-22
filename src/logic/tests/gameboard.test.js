@@ -53,6 +53,11 @@ describe("placeShip()", () => {
         expect(testGameboard.placeShip(submarine, 6, 5, false)).toBe("Space already occupied.");
     });
 
+    test("should track a ship's first square", () => { 
+        testGameboard.placeShip(battleship, 5, 5, true);
+        expect(battleship.firstSquareCoordinates).toStrictEqual([5, 5]);
+    });
+
     test("should allow ship placement on edges", () => { 
         testGameboard.placeShip(cruiser, 0, 0, false);
         expect(testGameboard.board[0]).toStrictEqual([cruiser, cruiser, cruiser, null, null, null, null, null, null, null]);
