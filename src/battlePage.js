@@ -1,5 +1,5 @@
 import { createCoordinatesObject } from "./helpers/createCoordinatesObject";
-import { resetSmartAttackData, smartSelectCoordinates, updateAttackMode } from "./smartAttack";
+import { resetSmartAttackData, smartSelectCoordinates, updateAttackMode } from "./helpers/smartAttack";
 
 // Used by other functions
 let human;
