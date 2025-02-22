@@ -29,8 +29,9 @@ export class Gameboard {
         ship.isPlaced = true;
         this.placedShipsCounter++;
 
-        // Keep track of ship's row and column for other functions
+        // Keep track of ship's row, column, and orientation for other functions
         ship.firstSquareCoordinates = [row, col];
+        ship.isVertical = isVertical;
 
         for (let i = 0; i < ship.length; i++) {
             this.board[row][col] = ship;
