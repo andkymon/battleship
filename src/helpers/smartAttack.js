@@ -1,12 +1,13 @@
 import { selectRandomCoordinates } from "./selectRandomCoordinates";
+import { getAdjacentSquaresKeys } from "./getAdjacentSquares";
 
 // Accessed by all functions
-let directions, attackMode, rowSelected, colSelected, direction, initialRowSelected, initialColSelected;
+let directions, attackMode, rowSelected, colSelected, direction, initialRowSelected, initialColSelected, ship;
 
 export function resetSmartAttackData() {
   directions = [[-1, 0], [0, -1], [1, 0], [0, 1]];
   attackMode = 0;
-  rowSelected = colSelected = direction = initialRowSelected = initialColSelected = null;
+  rowSelected = colSelected = direction = initialRowSelected = initialColSelected = ship = null;
 }
 
 export function smartSelectCoordinates(availableCoordinates) {
@@ -44,6 +45,7 @@ export function smartSelectCoordinates(availableCoordinates) {
       
     case 3: // Keep hitting opposite direction
       if (`${rowSelected + direction[0]}${colSelected + direction[1]}` in availableCoordinates === false) {
+        removeAdjacentSquares(ship, availableCoordinates);
         resetSmartAttackData();
         smartSelectCoordinates(availableCoordinates);
       } else {
@@ -54,6 +56,11 @@ export function smartSelectCoordinates(availableCoordinates) {
   }
 
   return [rowSelected, colSelected];
+}
+
+// Keep track of ship
+export function setShip(shipInstance) {
+  ship = shipInstance;
 }
 
 // Logic for next attack mode depending on result
@@ -87,8 +94,17 @@ export function updateAttackMode(board) {
       break;
     case 3:
       if (board[rowSelected][colSelected] === "X") {
-        resetSmartAttackData();
+        // So case 3's if statement will trigger next time smartSelectCoordinates is called, which resets it back to 0
+        rowSelected = null;
+        colSelected = null;
       }
       break;
+  }
+}
+
+function removeAdjacentSquares(ship, availableCoordinates) {
+  const adjacentSquaresKeys = getAdjacentSquaresKeys(ship);
+  for (const adjacentSquaresKey of adjacentSquaresKeys) {
+    delete availableCoordinates[adjacentSquaresKey];
   }
 }
