@@ -1,5 +1,5 @@
 import { createCoordinatesObject } from "./helpers/createCoordinatesObject";
-import { resetSmartAttackData, smartSelectCoordinates, updateAttackMode } from "./helpers/smartAttack";
+import { resetSmartAttackData, smartSelectCoordinates, setShip, updateAttackMode } from "./helpers/smartAttack";
 
 // Used by other functions
 let human;
@@ -15,8 +15,6 @@ export function startBattle(player1, player2) {
 
   // Used to keep track of coordinates the computer has not selected yet
   availableCoordinates = createCoordinatesObject();
-
-  // Data the computer needs to attack intelligently
   resetSmartAttackData();
 }
 
@@ -108,11 +106,19 @@ function attackHuman() {
   const computerGrid = document.querySelector(".computer.grid");
   computerGrid.classList.add("disabled");
 
-  // Select coordinates to attack intelligently
+  // Select coordinates to attack 
   const [rowSelected, colSelected] = smartSelectCoordinates(availableCoordinates);
+
+  // If a ship is found, let smartAttack.js keep track of it for adjacency square removal
+  if (human.gameboard.board[rowSelected][colSelected] !== null &&
+    typeof human.gameboard.board[rowSelected][colSelected] !== "string"
+  ) {
+    setShip(human.gameboard.board[rowSelected][colSelected]);
+  }
+
   human.gameboard.receiveAttack(rowSelected, colSelected);
 
-  // Attack mode changes depending on result
+  // smartAttack.js attack mode changes depending on result
   updateAttackMode(human.gameboard.board);
 
   // Styling
