@@ -1,3 +1,7 @@
+import { createCoordinatesObject } from "./helpers/createCoordinatesObject";
+import { resetSmartAttackData, smartSelectCoordinates, updateAttackMode } from "./smartAttack";
+
+// Used by other functions
 let human;
 let computer;
 let availableCoordinates;
@@ -11,6 +15,9 @@ export function startBattle(player1, player2) {
 
   // Used to keep track of coordinates the computer has not selected yet
   availableCoordinates = createCoordinatesObject();
+
+  // Data the computer needs to attack intelligently
+  resetSmartAttackData();
 }
 
 function displayGameMessage(string) {
@@ -22,7 +29,7 @@ function generateGridSquares() {
   const humanGrid = document.querySelector(".human.grid");
   const computerGrid = document.querySelector(".computer.grid");
 
-  // Clear the grid
+  // Clear the grids
   humanGrid.replaceChildren();
   computerGrid.replaceChildren();
 
@@ -35,19 +42,6 @@ function generateGridSquares() {
       computerGrid.appendChild(computerGridSquare);
     }
   }
-}
-
-function createCoordinatesObject() {
-  // Object with index as key, and an object with row and column properties as the value
-  // Did not use array so their index stays the same even if other elements are deleted
-  const BOARD_SIZE = 10 * 10; // Board is a 10x10 grid.
-  const coordinates = {};
-
-  for (let i = 0; i < BOARD_SIZE; i++) {
-    coordinates[i] = { row: Math.floor(i / 10), col: i % 10 };
-  }
-
-  return coordinates;
 }
 
 function createHumanGridSquare(rowNumber, colNumber) {
@@ -77,9 +71,8 @@ function createComputerGridSquare(rowNumber, colNumber) {
 }
 
 function attackComputer(computerGridSquare) {
-  const row = computerGridSquare.getAttribute("data-row");
-  const column = computerGridSquare.getAttribute("data-col");
-  const attackResult = computer.gameboard.receiveAttack(row, column);
+  const { row, col } = computerGridSquare.dataset;
+  const attackResult = computer.gameboard.receiveAttack(row, col);
 
   if (attackResult !== undefined) {
     displayGameMessage(attackResult);
@@ -89,7 +82,7 @@ function attackComputer(computerGridSquare) {
   displayGameMessage("");
   applyHitStyling(computer, computerGridSquare);
 
-  // Check if human won
+  // Check for win condition
   if (computer.gameboard.allShipsSunk() === true) {
     const gameEndEvent = new CustomEvent("gameEnd", { detail: "Human wins." });
     document.dispatchEvent(gameEndEvent);
@@ -101,7 +94,6 @@ function attackComputer(computerGridSquare) {
 }
 
 function applyHitStyling(player, gridSquare) {
-  // dataset property is an object containing an element's custom data attributes
   const { row, col } = gridSquare.dataset;
 
   // Blue on miss, red on hit
@@ -116,16 +108,21 @@ function attackHuman() {
   const computerGrid = document.querySelector(".computer.grid");
   computerGrid.classList.add("disabled");
 
-  // Select random coordinates from selection pool, and attack
-  const randomCoordinates = selectRandomCoordinates();
-  const { row, col, key } = randomCoordinates;
-  human.gameboard.receiveAttack(row, col);
+  // Select coordinates to attack intelligently
+  const [rowSelected, colSelected] = smartSelectCoordinates(availableCoordinates);
+  human.gameboard.receiveAttack(rowSelected, colSelected);
 
-  // Square will be blue on miss, red on hit
+  // Attack mode changes depending on result
+  updateAttackMode(human.gameboard.board);
+
+  // Styling
   const humanGridSquare = document.querySelector(
-    `.human.grid-square[data-row="${row}"][data-col="${col}"]`,
+    `.human.grid-square[data-row="${rowSelected}"][data-col="${colSelected}"]`,
   );
   applyHitStyling(human, humanGridSquare);
+
+  // Re-enable human clicks for human's turn
+  computerGrid.classList.remove("disabled");
 
   // Check if computer won
   if (human.gameboard.allShipsSunk() === true) {
@@ -136,16 +133,6 @@ function attackHuman() {
     return;
   }
 
-  // If not, remove from selection pool so the coordinates do not get selected again
-  delete availableCoordinates[key];
-
-  // Re-enable human clicks for human's turn
-  computerGrid.classList.remove("disabled");
-}
-
-function selectRandomCoordinates() {
-  const keys = Object.keys(availableCoordinates);
-  const randomKey = keys[Math.floor(Math.random() * keys.length)];
-  availableCoordinates[randomKey].key = randomKey;
-  return availableCoordinates[randomKey];
+  // If not, remove attacked square from selection pool so the coordinates do not get selected again
+  delete availableCoordinates[`${rowSelected}${colSelected}`];
 }
