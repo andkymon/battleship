@@ -26,8 +26,6 @@ export function getAdjacentSquaresKeys(ship, row = ship.firstSquareCoordinates[0
     addValidCoordinate(adjacentSquaresKeys, row, col); // Current cell
     addValidCoordinate(adjacentSquaresKeys, row + rowStep, col + colStep); // Right (vertical) / Bottom (horizontal)
 
-    row += isVertical ? 1 : 0;
-
     // If vertical, go to next row on next iteration; If horizontal, go to next column on next iteration
     if (isVertical) row++;
     else col++;
