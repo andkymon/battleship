@@ -1,4 +1,5 @@
 import { Ship } from "./ship";
+import { isValidCoordinates } from "../helpers/isValidCoordinates";
 
 export class Gameboard {
     constructor() {
@@ -12,7 +13,7 @@ export class Gameboard {
         const endCol = isVertical ? col : col + (ship.length - 1);
 
         // To prevent placing ships at invalid coordinates, check the validity of the last cell the ship will occupy
-        if (this.#isValidCoordinates([endRow, endCol]) === false) {
+        if (isValidCoordinates(endRow, endCol) === false) {
             return "Out of bounds.";  
         }
 
@@ -40,15 +41,6 @@ export class Gameboard {
         }
     }
 
-    #isValidCoordinates(coordinates) {
-        for (const value of coordinates) {
-            if (value > 9 || value < 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     #isSpaceOccupied(ship, row, col, isVertical) {
         // For context, here's an example diagram of a 2-cell vertical ship (cells marked by o) with padding (cells marked by x):
 
@@ -74,15 +66,15 @@ export class Gameboard {
         // Each cell will only be checked if not out of bounds, will skip if it is
         for (let i = 0; i < ship.length + 2; i++) {
             // Left of current cell (vertical), Top of current cell (horizontal)
-            if ((this.#isValidCoordinates([row - rowConstant, col - colConstant]) &&
+            if ((isValidCoordinates(row - rowConstant, col - colConstant) &&
                 this.board[row - rowConstant][col - colConstant] !== null) ||
 
                 // Middle cell (current cell)
-                (this.#isValidCoordinates([row, col]) &&
+                (isValidCoordinates(row, col) &&
                 this.board[row][col] !== null) ||
 
                 // Right of current cell (vertical), Bottom of current cell (horizontal)
-                (this.#isValidCoordinates([row + rowConstant, col + colConstant]) &&
+                (isValidCoordinates(row + rowConstant, col + colConstant) &&
                 this.board[row + rowConstant][col + colConstant] !== null)
             ) {
                 return false;
@@ -103,7 +95,7 @@ export class Gameboard {
             return "All ships must be placed before attacking."
         }
 
-        if (this.#isValidCoordinates([row, col]) === false) {
+        if (isValidCoordinates(row, col) === false) {
             return "Out of bounds.";  
         }
 
