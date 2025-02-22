@@ -1,5 +1,6 @@
 import { Ship } from "./ship";
 import { isValidCoordinates } from "../helpers/isValidCoordinates";
+import { getAdjacentSquaresKeys } from "../helpers/getAdjacentSquares";
 
 export class Gameboard {
     constructor() {
@@ -46,49 +47,10 @@ export class Gameboard {
     }
 
     #isSpaceOccupied(ship, row, col, isVertical) {
-        // For context, here's an example diagram of a 2-cell vertical ship (cells marked by o) with padding (cells marked by x):
-
-        //  x x x  <- Top padding or surrounding cells (first iteration)
-        //  x o x  <- Ship cells (o) with padding on both sides
-        //  x o x  <- Ship cells (o) with padding on both sides
-        //  x x x  <- Bottom padding or surrounding cells (last iteration)
-
-        // All these cells must be null before placing a ship
-
-        // If vertical, iteratively check 3 cells from left to right. If horizontal, iteratively check 3 cells from top to bottom. 
-        const rowConstant = isVertical ? 0 : 1;
-        const colConstant = isVertical ? 1 : 0;
-        
-        // Start checking from one cell before ship's first cell (The x x x cells)
-        if (isVertical) {
-            row--;
-        } else {
-            col--;
-        }
-
-        // Loop runs for ship.length + 2 as we have to also check the the ship's surrounding cells
-        // Each cell will only be checked if not out of bounds, will skip if it is
-        for (let i = 0; i < ship.length + 2; i++) {
-            // Left of current cell (vertical), Top of current cell (horizontal)
-            if ((isValidCoordinates(row - rowConstant, col - colConstant) &&
-                this.board[row - rowConstant][col - colConstant] !== null) ||
-
-                // Middle cell (current cell)
-                (isValidCoordinates(row, col) &&
-                this.board[row][col] !== null) ||
-
-                // Right of current cell (vertical), Bottom of current cell (horizontal)
-                (isValidCoordinates(row + rowConstant, col + colConstant) &&
-                this.board[row + rowConstant][col + colConstant] !== null)
-            ) {
+        const adjacentSquaresKeys = getAdjacentSquaresKeys(ship, row, col, isVertical);
+        for (const adjacentSquaresKey of adjacentSquaresKeys) {
+            if (this.board[adjacentSquaresKey[0]][adjacentSquaresKey[1]] !== null) {
                 return false;
-            }
-
-            // If vertical, go to next row on next iteration; If horizontal, go to next column on next iteration
-            if (isVertical) {
-                row++;
-            } else {
-                col++;
             }
         }
         return true;
