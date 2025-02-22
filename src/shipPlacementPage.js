@@ -63,7 +63,7 @@ function addSquareEventListeners(gridSquare) {
     if (allShipsPlaced()) {
       disableGridSquares();
 
-      // Announce that this page is done to switch to battlepage
+      // Announce that this page is done to switch to battle page
       const allShipsPlaced = new Event("allShipsPlaced");
       document.dispatchEvent(allShipsPlaced);
       return;
@@ -144,7 +144,6 @@ function applyHoveredStyling(rowNumber, colNumber) {
   for (let i = 0; i < currentShip.length; i++) {
     currentRow = rowNumber + rowStep * i;
     currentCol = colNumber + colStep * i;
-    console.log(currentRow, currentCol);
 
     // Avoid style application on non existent squares
     if (currentRow > 9 || currentCol > 9) {
