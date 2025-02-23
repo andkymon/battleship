@@ -10,25 +10,16 @@ export function getAdjacentSquaresKeys(ship, row = ship.firstSquareCoordinates[0
 
   // All these cells must be null before placing a ship
 
-  // If vertical, iteratively check 3 cells from left to right. If horizontal, iteratively check 3 cells from top to bottom.
-  const rowStep = isVertical ? 0 : 1;
-  const colStep = isVertical ? 1 : 0;
-
-  // Start checking from one cell before ship's first cell (The x x x cells)
-  if (isVertical) row--;
-  else col--;
-
   const adjacentSquaresKeys = [];
-  // Loop runs for ship.length + 2 as we have to also check the the ship's surrounding cells
-  // Each cell will only be checked if not out of bounds, will skip if it is
-  for (let i = 0; i < ship.length + 2; i++) {
-    addValidCoordinate(adjacentSquaresKeys, row - rowStep, col - colStep); // Left (vertical) / Top (horizontal)
-    addValidCoordinate(adjacentSquaresKeys, row, col); // Current cell
-    addValidCoordinate(adjacentSquaresKeys, row + rowStep, col + colStep); // Right (vertical) / Bottom (horizontal)
+  // Start checking from one cell before ship's first cell (The x x x cells)
+  // Each cell will only be added if not out of bounds, will skip if it is
+  for (let i = -1; i <= ship.length; i++) {
+    for (let j = -1; j <= 1; j++) {
+      const newRow = isVertical ? row + i : row + j;
+      const newCol = isVertical ? col + j : col + i;
 
-    // If vertical, go to next row on next iteration; If horizontal, go to next column on next iteration
-    if (isVertical) row++;
-    else col++;
+      addValidCoordinate(adjacentSquaresKeys, newRow, newCol);
+    }
   }
   return adjacentSquaresKeys;
 }
