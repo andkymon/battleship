@@ -42,7 +42,8 @@ export function smartAttack(playerObject) {
         colSelected = initialColSelected;
         direction[0] *= -1;
         direction[1] *= -1;
-        smartAttack(human); // Use next attack mode (3)
+        const attackedCoordinates = smartAttack(human); // Use next attack mode (3)
+        return attackedCoordinates;
       } else {
         rowSelected += direction[0];
         colSelected += direction[1];
@@ -54,7 +55,8 @@ export function smartAttack(playerObject) {
         removeAdjacentSquares();
         directions = [[-1, 0], [0, -1], [1, 0], [0, 1]];
         attackMode = 0;
-        smartAttack(human); // Use next attack mode (0)
+        const attackedCoordinates = smartAttack(human); // Use next attack mode (0)
+        return attackedCoordinates;
       } else {
         rowSelected += direction[0];
         colSelected += direction[1];
@@ -63,13 +65,14 @@ export function smartAttack(playerObject) {
   }
 
   // If a ship is found, assign it as the targetShip for removal of adjacent squares from the selection pool once done
+  console.log(availableCoordinates);
+  console.log(`${rowSelected}${colSelected}`);
   if (human.gameboard.board[rowSelected][colSelected] !== null && typeof human.gameboard.board[rowSelected][colSelected] !== "string") {
     targetShip = human.gameboard.board[rowSelected][colSelected];
   }
 
   // Had to store this for the return value as rowSelected and colSelected is updated by updateAttackMode()
   const attackedCoordinates = [rowSelected, colSelected];
-  console.log(`${rowSelected}${colSelected}`);
   human.gameboard.receiveAttack(rowSelected, colSelected);
   delete availableCoordinates[`${rowSelected}${colSelected}`];
   updateAttackMode();
