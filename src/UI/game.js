@@ -35,13 +35,16 @@ document.querySelector("#start").addEventListener("click", gameStart);
 export function displayStartPage() {
   // Switch from end page (if restarting) to start page
   document.querySelector("#win-page").style.display = "none"; 
-  document.querySelector("#title").style.display = "block";
-  document.querySelector("#start-page").style.display = "block";
+  document.querySelector("body > .title").style.display = "none";
+  document.querySelector("#start-page .title").style.display = "block";
+  document.querySelector("#start-page").style.display = "flex";
 }
 
 function displayShipPlacementPage() {
   // Switch from start page to ship placement page
   document.querySelector("#start-page").style.display = "none"; 
+  document.querySelector("#start-page .title").style.display = "none";
+  document.querySelector("body > .title").style.display = "block";
   document.querySelector("#ship-placement-page").style.display = "block";
   document.querySelector("#game-message").style.display = "block";
 }
@@ -55,7 +58,7 @@ function displayBattlePage() {
 function displayEndPage() {
   // Switch from battle page to end page
   document.querySelector("#battle-page").style.display = "none";
-  document.querySelector("#title").style.display = "none";
+  document.querySelector("body > .title").style.display = "none";
   document.querySelector("#game-message").style.display = "none";
   document.querySelector("#win-page").style.display = "flex";
 }
