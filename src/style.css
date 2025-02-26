@@ -50,7 +50,7 @@ button:hover {
 :root {
     --main-color: #ff5757;
     --secondary-color: #ffde59;
-    ;
+    --shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
 }
 
 /* General */
@@ -65,6 +65,7 @@ h1 {
     color: var(--secondary-color);
     font-family: TitanOne, Arial, Helvetica, sans-serif;
     margin: 0px 100px;
+    text-shadow: var(--shadow);
 }
 
 /* Start page */
@@ -89,6 +90,16 @@ h1 {
     background-color: var(--secondary-color);
     font-family: GamjaFlower, Arial, Helvetica, sans-serif;
     font-size: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+}
+
+.game-button:hover {
+    transform: scale(1.25);
+}
+
+.game-button:active {
+    transform: scale(1);
 }
 
 #game-message {
