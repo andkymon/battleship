@@ -36,16 +36,23 @@ button:hover {
     cursor: pointer;
 }
 
+/* Variables */
+:root {
+    --main-color: #ff5757;
+    --secondary-color: #ffde59;
+    ;
+}
+
 /* General */
 body {
     height: 100vh;
-    background-color: #ff5757;
+    background-color: var(--main-color);
 }
 
 h1 {
     text-align: center;
     font-size: 3rem;
-    color: #ffde59;
+    color: var(--secondary-color);
 }
 
 /* Start page */
@@ -67,7 +74,7 @@ h1 {
     width: 160px;
     border-radius: 16px;
     border: none;
-    background-color: yellow;
+    background-color: var(--secondary-color);
 }
 
 #game-message {
