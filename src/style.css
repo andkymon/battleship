@@ -81,6 +81,10 @@ h1 {
     background-color: blue;
 }
 
+#ship-placement-page {
+    display: none; /* Enabled after game is started */
+}
+
 #battle-page {
     display: none; /* Enabled after ship placement is done */
     flex-wrap: wrap;
@@ -98,7 +102,7 @@ h1 {
 }
 
 #win-page {
-    display: none;
+    display: none; /* Enabled after game is done */
     flex-direction: column;
     align-items: center;
 }

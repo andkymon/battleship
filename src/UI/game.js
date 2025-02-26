@@ -7,7 +7,7 @@ import { startBattle } from "./battlePage.js";
 let human;
 let computer;
 
-export function gameStart() {
+function gameStart() {
   human = new Player();
   computer = new Player();
 
@@ -26,14 +26,23 @@ document.addEventListener("gameEnd", (event) => {
   document.querySelector("#win-page h1").textContent = event.detail; // Display who won
 });
 
-// Button to restart the game
-document.querySelector("#restart").addEventListener("click", gameStart);
+// Button to go back to the starting screen
+document.querySelector("#restart").addEventListener("click", displayStartPage);
+
+// Button to start the game
+document.querySelector("#start").addEventListener("click", gameStart);
+
+export function displayStartPage() {
+  // Switch from end page (if restarting) to start page
+  document.querySelector("#win-page").style.display = "none"; 
+  document.querySelector("#title").style.display = "block";
+  document.querySelector("#start-page").style.display = "block";
+}
 
 function displayShipPlacementPage() {
-  // Switch from end page (if restarting) to ship placement page
-  document.querySelector("#win-page").style.display = "none"; 
+  // Switch from start page to ship placement page
+  document.querySelector("#start-page").style.display = "none"; 
   document.querySelector("#ship-placement-page").style.display = "block";
-  document.querySelector("#title").style.display = "block";
   document.querySelector("#game-message").style.display = "block";
 }
 
