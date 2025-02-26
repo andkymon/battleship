@@ -1,3 +1,13 @@
+@font-face {
+    font-family: TitanOne;
+    src: url("./assets/fonts/TitanOne-Regular.woff2");
+}
+
+@font-face {
+    font-family: GamjaFlower;
+    src: url("./assets/fonts/GamjaFlower-Regular.woff2");
+}
+
 /*
 Josh's Custom CSS Reset
 https://www.joshwcomeau.com/css/custom-css-reset/
@@ -53,6 +63,8 @@ h1 {
     text-align: center;
     font-size: 3rem;
     color: var(--secondary-color);
+    font-family: TitanOne, Arial, Helvetica, sans-serif;
+    margin: 0px 100px;
 }
 
 /* Start page */
@@ -71,10 +83,12 @@ h1 {
 
 .game-button {
     height: 80px;
-    width: 160px;
+    width: 200px;
     border-radius: 16px;
     border: none;
     background-color: var(--secondary-color);
+    font-family: GamjaFlower, Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
 }
 
 #game-message {
