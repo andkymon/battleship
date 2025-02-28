@@ -20,7 +20,7 @@ export function startShipPlacement(player) {
   currentShip = gameboard.ships[currentShipIndex];
   isVertical = true;
 
-  gameMessage.textContent = `Place your ${shipNames[currentShipIndex]}`;
+  gameMessage.textContent = `Hide your ${shipNames[currentShipIndex]}`;
 
   // Clear grid before generating grid squares
   grid.replaceChildren();
@@ -117,7 +117,7 @@ function disableGridSquares() {
 
 function updateCurrentShip() {
   currentShipIndex++;
-  gameMessage.textContent = `Place your ${shipNames[currentShipIndex]}`;
+  gameMessage.textContent = `Hide your ${shipNames[currentShipIndex]}`;
   currentShip = gameboard.ships[currentShipIndex];
 }
 

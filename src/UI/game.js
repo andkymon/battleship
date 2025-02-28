@@ -44,8 +44,8 @@ function displayShipPlacementPage() {
   // Switch from start page to ship placement page
   document.querySelector("#start-page").style.display = "none"; 
   document.querySelector("#start-page .title").style.display = "none";
-  document.querySelector("body > .title").style.display = "block";
   document.querySelector("#ship-placement-page").style.display = "block";
+  document.querySelector("body > .title").style.display = "block";
   document.querySelector("#game-message").style.display = "block";
 }
 
