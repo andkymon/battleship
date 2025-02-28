@@ -8,7 +8,7 @@ export function startBattle(player1, player2) {
   human = player1;
   computer = player2;
 
-  displayGameMessage("");
+  displayGameMessage("Take turns stealing snacks - last fridge standing wins!");
   generateGridSquares();
 
   // Reset data for smart computer moves
@@ -70,11 +70,11 @@ function attackComputer(computerGridSquare) {
   const attackResult = computer.gameboard.receiveAttack(row, col);
 
   if (attackResult !== undefined) {
-    displayGameMessage(attackResult);
+    displayGameMessage("Deja food! You already grabbed there!");
     return;
   }
 
-  displayGameMessage("");
+  displayGameMessage("Take turns stealing snacks - last fridge standing wins!");
   applyHitStyling(computer, computerGridSquare);
 
   // Check for win condition
