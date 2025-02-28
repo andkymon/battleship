@@ -1,9 +1,9 @@
 const shipNames = [
-  "carrier",
-  "battleship",
-  "cruiser",
-  "submarine",
-  "destroyer",
+  "sub sandwich",
+  "burger",
+  "hotdog",
+  "chicken",
+  "ice cream",
 ];
 
 // Used by event listeners
