@@ -83,6 +83,7 @@ h1 {
     background-repeat: no-repeat;
     background-position: calc(50% + 46px);
     background-size: 620px 535px; 
+    position: relative;
 }
 
 .grid {
@@ -175,8 +176,10 @@ h1 {
     opacity: 0.5;
 }
 
-#win-page {
-    display: none; /* Enabled after game is done */
-    flex-direction: column;
-    align-items: center;
+.player-name {
+    position: absolute;
+    top: 10%;
+    font-family: GamjaFlower, Arial, Helvetica, sans-serif;
+    font-size: 1.75rem;
+    color: purple;
 }
