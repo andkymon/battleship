@@ -123,8 +123,8 @@ function updateCurrentShip() {
 }
 
 // Used by "r" click event listener to determine which square is currently being hovered
-let hoveredRowIndex;
-let hoveredColIndex;
+let hoveredRowIndex = null;
+let hoveredColIndex = null;
 
 // Shared by hovered styling functions
 let hoveredGridSquares = [];
@@ -132,6 +132,8 @@ let hoveredGridSquares = [];
 function applyHoveredStyling(rowNumber, colNumber) {
   hoveredRowIndex = rowNumber;
   hoveredColIndex = colNumber;
+
+  console.log(hoveredColIndex);
 
   addFoodDiv(rowNumber, colNumber);
 
@@ -182,8 +184,10 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "r") {
     isVertical = !isVertical;
 
-    console.log(hoveredRowIndex);
-    console.log(hoveredColIndex);
+    if (hoveredRowIndex === null && hoveredColIndex === null) {
+      return;
+    }
+
     const hoveredGridSquare = document.querySelector(
       `[data-row="${hoveredRowIndex}"][data-col="${hoveredColIndex}"]`,
     );
@@ -195,3 +199,9 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
+
+// Reset hovered square to null when pointer is outside grid
+grid.addEventListener("mouseleave", () => {
+  hoveredRowIndex = null;
+  hoveredColIndex = null;
+})
