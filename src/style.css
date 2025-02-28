@@ -78,11 +78,11 @@ h1 {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 100px;
+    padding: 80px;
     background-image: url("./assets/icons/fridge.png");
     background-repeat: no-repeat;
     background-position: calc(50% + 46px);
-    background-size: 620px 535px; /* Variable */
+    background-size: 620px 535px; 
 }
 
 .grid {
@@ -108,18 +108,23 @@ h1 {
     background-color: blue;
 }
 
-/* Start page */
-#start-page {
+/* Start page and Win page */
+#start-page,
+#win-page {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 240px;
+    gap: 180px;
 }
 
 #start-page .title {
     font-size: 6rem;
+}
+
+#win-page h1 {
+    font-size: 4rem;
 }
 
 .game-button {
@@ -129,7 +134,7 @@ h1 {
     border: none;
     background-color: var(--secondary-color);
     font-family: GamjaFlower, Arial, Helvetica, sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     box-shadow: var(--shadow);
     transition: 0.3s;
 }

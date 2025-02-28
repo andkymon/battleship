@@ -79,7 +79,7 @@ function attackComputer(computerGridSquare) {
 
   // Check for win condition
   if (computer.gameboard.allShipsSunk() === true) {
-    const gameEndEvent = new CustomEvent("gameEnd", { detail: "Human wins." });
+    const gameEndEvent = new CustomEvent("gameEnd", { detail: "Winner, winner, no dinner for them!" });
     document.dispatchEvent(gameEndEvent);
     return;
   }
@@ -118,7 +118,7 @@ function attackHuman() {
   // Check if computer won
   if (human.gameboard.allShipsSunk() === true) {
     const gameEndEvent = new CustomEvent("gameEnd", {
-      detail: "Computer wins.",
+      detail: "They took everything… even the last slice.",
     });
     document.dispatchEvent(gameEndEvent);
     return;
