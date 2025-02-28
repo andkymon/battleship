@@ -102,6 +102,17 @@ function applyHitStyling(player, gridSquare) {
   // Blue on miss, red on hit
   gridSquare.style.backgroundColor =
     player.gameboard.board[row][col] === "X" ? "blue" : "red";
+  
+  // Cover food div
+  gridSquare.style.zIndex = 2;
+
+  // Cover food div if gridsquare is parent element
+  // z index cant cover its children elements
+  if (gridSquare.firstChild) {
+    const foodCover = document.createElement("div");
+    foodCover.classList.add("food-cover");
+    gridSquare.append(foodCover);
+  }
 }
 
 document.addEventListener("computerTurn", attackHuman);

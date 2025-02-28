@@ -52,6 +52,7 @@ button:hover {
     --secondary-color: #ffde59;
     --shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
     --grid-square-size: 40px;
+    --grid-square-size-no-border: calc(var(--grid-square-size) - 2px);
 }
 
 /* General */
@@ -228,4 +229,12 @@ h1 {
     width: calc(var(--grid-square-size) * 2);
     background-image: url("./assets/icons/ice-cream.png");
     transform: rotate(90deg) translate(-25%, -50%);
+}
+
+.food-cover {
+    position: absolute;
+    height: var(--grid-square-size-no-border);
+    width: var(--grid-square-size-no-border);
+    background-color: red;
+    z-index: 2;
 }
