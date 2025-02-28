@@ -78,6 +78,11 @@ h1 {
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 100px;
+    background-image: url("./assets/icons/fridge.png");
+    background-repeat: no-repeat;
+    background-position: calc(50% + 45px);
+    background-size: 620px 535px; /* Variable */
 }
 
 .grid {
@@ -87,10 +92,12 @@ h1 {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    transform: scale(0.8) translateY(11%);
 }
 
 .grid-square {
     border: 1px solid black;
+    background-color: rgb(160, 101, 209);
 }
 
 .clicked {
@@ -146,6 +153,7 @@ h1 {
     font-size: 1.5rem;
 }
 
+/* Battle page */
 #battle-page {
     display: none; /* Enabled after ship placement is done */
     flex-wrap: wrap;
