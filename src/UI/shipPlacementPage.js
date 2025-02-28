@@ -79,11 +79,15 @@ function addSquareEventListeners(gridSquare) {
 
   gridSquare.addEventListener("mouseleave", () => {
     clearHoveredStyling();
-    gridSquare.replaceChildren();
+
+    // Prevents removing existing foodDivs on clicked squares
+    gridSquare.removeChild(gridSquare.lastChild); 
   });
 }
 
 function applyClickedStyling(rowNumber, colNumber) {
+  addFoodDiv(rowNumber, colNumber);
+
   // To set which axis to increment on iterations
   const rowStep = isVertical ? 1 : 0;
   const colStep = isVertical ? 0 : 1;
@@ -132,8 +136,6 @@ let hoveredGridSquares = [];
 function applyHoveredStyling(rowNumber, colNumber) {
   hoveredRowIndex = rowNumber;
   hoveredColIndex = colNumber;
-
-  console.log(hoveredColIndex);
 
   addFoodDiv(rowNumber, colNumber);
 
@@ -194,7 +196,7 @@ document.addEventListener("keydown", (event) => {
 
     if (hoveredGridSquare.classList.contains("hovered")) {
       clearHoveredStyling();
-      hoveredGridSquare.replaceChildren();
+      hoveredGridSquare.removeChild(hoveredGridSquare.lastChild); // Prevents removing existing foodDivs on clicked squares
       applyHoveredStyling(hoveredRowIndex, hoveredColIndex);
     }
   }
