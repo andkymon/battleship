@@ -51,6 +51,7 @@ button:hover {
     --main-color: #ff5757;
     --secondary-color: #ffde59;
     --shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+    --grid-square-size: 40px;
 }
 
 /* General */
@@ -190,7 +191,7 @@ h1 {
     position: absolute;
     top: 0;
     left: 0;
-    height: 40px;
+    height: var(--grid-square-size);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -200,7 +201,31 @@ h1 {
 }
 
 .food.sub {
-    width: 200px;
+    width: calc(var(--grid-square-size) * 5);
     background-image: url("./assets/icons/sub.png");
     transform: rotate(90deg) translate(-10%, -50%);
+}
+
+.food.hotdog {
+    width: calc(var(--grid-square-size) * 4);
+    background-image: url("./assets/icons/hotdog.png");
+    transform: rotate(90deg) translate(-12%, -50%);
+}
+
+.food.burger {
+    width: calc(var(--grid-square-size) * 3);
+    background-image: url("./assets/icons/burger.png");
+    transform: rotate(90deg) translate(-15%, -50%);
+}
+
+.food.chicken {
+    width: calc(var(--grid-square-size) * 3);
+    background-image: url("./assets/icons/chicken.png");
+    transform: rotate(90deg) translate(-18%, -50%);
+}
+
+.food.cream {
+    width: calc(var(--grid-square-size) * 2);
+    background-image: url("./assets/icons/ice-cream.png");
+    transform: rotate(90deg) translate(-25%, -50%);
 }

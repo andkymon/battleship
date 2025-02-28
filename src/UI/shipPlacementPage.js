@@ -1,9 +1,17 @@
 const shipNames = [
   "sub sandwich",
-  "burger",
   "hotdog",
+  "burger",
   "chicken",
   "ice cream",
+];
+
+const shipClassNames = [
+  "sub",
+  "hotdog",
+  "burger",
+  "chicken",
+  "cream",
 ];
 
 // Used by event listeners
@@ -176,7 +184,7 @@ function addFoodDiv(rowNumber, colNumber) {
     `[data-row="${rowNumber}"][data-col="${colNumber}"]`,
   );
   const foodDiv = document.createElement("div");
-  foodDiv.classList.add("food", "sub");
+  foodDiv.classList.add("food", shipClassNames[currentShipIndex]);
   foodDiv.style.transform = isVertical ? "transform: rotate(90deg) translate(-10%, -50%)" : "none";
   gridSquare.append(foodDiv);
 }
