@@ -49,6 +49,14 @@ function createHumanGridSquare(rowNumber, colNumber) {
     humanGridSquare.classList.add("clicked");
   }
 
+  // If the respective grid square on the previous page had a child, append it here
+  const gridSquare = document.querySelector(
+    `#ship-placement-page [data-row="${rowNumber}"][data-col="${colNumber}"]`,
+  );
+  if (gridSquare.firstChild) {
+    humanGridSquare.append(gridSquare.firstChild);
+  }
+
   return humanGridSquare;
 }
 
