@@ -81,14 +81,14 @@ h1 {
     padding: 100px;
     background-image: url("./assets/icons/fridge.png");
     background-repeat: no-repeat;
-    background-position: calc(50% + 45px);
+    background-position: calc(50% + 46px);
     background-size: 620px 535px; /* Variable */
 }
 
 .grid {
     height: 402px;
     width: 402px;
-    border: 1px solid black;
+    border: 1px solid purple;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
@@ -96,7 +96,7 @@ h1 {
 }
 
 .grid-square {
-    border: 1px solid black;
+    border: 1px solid purple;
     background-color: rgb(160, 101, 209);
 }
 
