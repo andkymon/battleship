@@ -79,6 +79,7 @@ function addSquareEventListeners(gridSquare) {
 
   gridSquare.addEventListener("mouseleave", () => {
     clearHoveredStyling();
+    gridSquare.replaceChildren();
   });
 }
 
@@ -132,6 +133,8 @@ function applyHoveredStyling(rowNumber, colNumber) {
   hoveredRowIndex = rowNumber;
   hoveredColIndex = colNumber;
 
+  addFoodDiv(rowNumber, colNumber);
+
   // To set which axis to increment on iterations
   const rowStep = isVertical ? 1 : 0;
   const colStep = isVertical ? 0 : 1;
@@ -164,11 +167,31 @@ function clearHoveredStyling() {
   hoveredGridSquares = [];
 }
 
+function addFoodDiv(rowNumber, colNumber) {
+  const gridSquare = document.querySelector(
+    `[data-row="${rowNumber}"][data-col="${colNumber}"]`,
+  );
+  const foodDiv = document.createElement("div");
+  foodDiv.classList.add("food", "sub");
+  foodDiv.style.transform = isVertical ? "transform: rotate(90deg) translate(-10%, -50%)" : "none";
+  gridSquare.append(foodDiv);
+}
+
 // Allow ship rotation when "r" key is pressed
 document.addEventListener("keydown", (event) => {
   if (event.key === "r") {
     isVertical = !isVertical;
-    clearHoveredStyling();
-    applyHoveredStyling(hoveredRowIndex, hoveredColIndex);
+
+    console.log(hoveredRowIndex);
+    console.log(hoveredColIndex);
+    const hoveredGridSquare = document.querySelector(
+      `[data-row="${hoveredRowIndex}"][data-col="${hoveredColIndex}"]`,
+    );
+
+    if (hoveredGridSquare.classList.contains("hovered")) {
+      clearHoveredStyling();
+      hoveredGridSquare.replaceChildren();
+      applyHoveredStyling(hoveredRowIndex, hoveredColIndex);
+    }
   }
 });

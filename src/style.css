@@ -94,11 +94,13 @@ h1 {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
     transform: scale(0.8) translateY(11%);
+    overflow: hidden;
 }
 
 .grid-square {
+    position: relative;
     border: 1px solid purple;
-    background-color: rgb(160, 101, 209);
+    background-color: rgb(160, 100, 210);
 }
 
 .clicked {
@@ -182,4 +184,23 @@ h1 {
     font-family: GamjaFlower, Arial, Helvetica, sans-serif;
     font-size: 1.75rem;
     color: purple;
+}
+
+.food {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    z-index: 1;
+    pointer-events: none;
+    transform-origin: left center; /* Rotates from the left edge */
+}
+
+.food.sub {
+    width: 200px;
+    background-image: url("./assets/icons/sub.png");
+    transform: rotate(90deg) translate(-10%, -50%);
 }
