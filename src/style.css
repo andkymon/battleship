@@ -60,6 +60,9 @@ body {
     height: 100vh;
     background-color: var(--main-color);
     font-family: GamjaFlower, Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 h1 {
@@ -116,7 +119,7 @@ h1 {
 /* Start page and Win page */
 #start-page,
 #win-page {
-    height: 100vh;
+    height: 97vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -186,13 +189,12 @@ h1 {
 }
 
 #attributions {
-    position: absolute;
-    bottom: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     font-size: 0.75rem;
     gap: 24px;
+    margin-top: 40px;
 }
 
 #attributions a {
