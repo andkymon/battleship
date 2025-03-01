@@ -121,7 +121,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 180px;
+    gap: 40px;
 }
 
 #start-page .title {
