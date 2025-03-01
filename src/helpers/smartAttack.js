@@ -1,6 +1,7 @@
 import { createCoordinatesObject } from "./createCoordinatesObject";
 import { selectRandomCoordinates } from "./selectRandomCoordinates";
 import { getAdjacentSquaresKeys } from "./getAdjacentSquares";
+import { isShip } from "./isShip";
 
 // Accessed by all functions
 let directions, attackMode, rowSelected, colSelected, direction, initialRowSelected, initialColSelected, human, targetShip, availableCoordinates;
@@ -67,7 +68,7 @@ export function smartAttack(playerObject) {
   // If a ship is found, assign it as the targetShip for removal of adjacent squares from the selection pool once done
   console.log(availableCoordinates);
   console.log(`${rowSelected}${colSelected}`);
-  if (human.gameboard.board[rowSelected][colSelected] !== null && typeof human.gameboard.board[rowSelected][colSelected] !== "string") {
+  if (isShip(human.gameboard.board[rowSelected][colSelected])) {
     targetShip = human.gameboard.board[rowSelected][colSelected];
   }
 

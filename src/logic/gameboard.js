@@ -1,6 +1,7 @@
 import { Ship } from "./ship";
 import { isValidCoordinates } from "../helpers/isValidCoordinates";
 import { getAdjacentSquaresKeys } from "../helpers/getAdjacentSquares";
+import { isShip } from "../helpers/isShip";
 
 export class Gameboard {
     constructor() {
@@ -49,7 +50,7 @@ export class Gameboard {
     #isSpaceOccupied(ship, row, col, isVertical) {
         const adjacentSquaresKeys = getAdjacentSquaresKeys(ship, row, col, isVertical);
         for (const adjacentSquaresKey of adjacentSquaresKeys) {
-            if (this.board[adjacentSquaresKey[0]][adjacentSquaresKey[1]] !== null) {
+            if (isShip(this.board[adjacentSquaresKey[0]][adjacentSquaresKey[1]])) {
                 return false;
             }
         }
