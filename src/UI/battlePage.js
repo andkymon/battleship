@@ -4,12 +4,13 @@ import { isShip } from "../helpers/isShip";
 // Used by other functions
 let human;
 let computer;
+const defaultGameMessage = "Take turns grabbing snacks - last fridge standing wins!"
 
 export function startBattle(player1, player2) {
   human = player1;
   computer = player2;
 
-  displayGameMessage("Take turns stealing snacks - last fridge standing wins!");
+  displayGameMessage(defaultGameMessage);
   generateGridSquares();
 
   // Reset data for smart computer moves
@@ -83,12 +84,12 @@ function attackComputer(computerGridSquare) {
     return;
   }
 
-  displayGameMessage("Take turns stealing snacks - last fridge standing wins!");
+  displayGameMessage(defaultGameMessage);
   applyHitStyling(computer, computerGridSquare);
 
   // Check for win condition
   if (computer.gameboard.allShipsSunk() === true) {
-    const gameEndEvent = new CustomEvent("gameEnd", { detail: "Winner, winner, no dinner for them!" });
+    const gameEndEvent = new CustomEvent("gameEnd", { detail: "Winner, winner, no dinner for them! \n You Won!" });
     document.dispatchEvent(gameEndEvent);
     return;
   }
@@ -135,7 +136,7 @@ function attackHuman() {
   // Check if computer won
   if (human.gameboard.allShipsSunk() === true) {
     const gameEndEvent = new CustomEvent("gameEnd", {
-      detail: "They took everything… even the last slice.",
+      detail: "They took everything… even the last slice. You lost.",
     });
     document.dispatchEvent(gameEndEvent);
     return;
