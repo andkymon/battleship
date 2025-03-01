@@ -188,6 +188,7 @@ h1 {
     color: purple;
 }
 
+/* Ship styling / Hit styling  */
 .food {
     position: absolute;
     top: 0;
@@ -236,5 +237,20 @@ h1 {
     height: var(--grid-square-size-no-border);
     width: var(--grid-square-size-no-border);
     background-color: red;
+    z-index: 2;
+}
+
+.grid-square.hit, 
+.food-cover {
+    background-color: red;
+    background-image: url("./assets/icons/crumbs.png");
+    background-size: contain;
+}
+
+.grid-square.miss {
+    background-color: blue;
+}
+
+.human.grid-square.hit {
     z-index: 2;
 }

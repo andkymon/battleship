@@ -1,4 +1,5 @@
 import { resetSmartAttack, smartAttack } from "../helpers/smartAttack";
+import { isShip } from "../helpers/isShip";
 
 // Used by other functions
 let human;
@@ -45,7 +46,7 @@ function createHumanGridSquare(rowNumber, colNumber) {
   humanGridSquare.setAttribute("data-row", rowNumber);
   humanGridSquare.setAttribute("data-col", colNumber);
 
-  if (human.gameboard.board[rowNumber][colNumber] !== null) {
+  if (isShip(human.gameboard.board[rowNumber][colNumber])) {
     humanGridSquare.classList.add("clicked");
   }
 
@@ -99,16 +100,13 @@ function attackComputer(computerGridSquare) {
 function applyHitStyling(player, gridSquare) {
   const { row, col } = gridSquare.dataset;
 
-  // Blue on miss, red on hit
-  gridSquare.style.backgroundColor =
-    player.gameboard.board[row][col] === "X" ? "blue" : "red";
-  
-  // Cover food div
-  gridSquare.style.zIndex = 2;
+  const className = player.gameboard.board[row][col] === "X" ? "miss" : "hit";
+  gridSquare.classList.add(className)
 
+  // Only apply below to human board
   // Cover food div if gridsquare is parent element
   // z index cant cover its children elements
-  if (gridSquare.firstChild) {
+  if (gridSquare.classList.contains("human") && gridSquare.firstChild) {
     const foodCover = document.createElement("div");
     foodCover.classList.add("food-cover");
     gridSquare.append(foodCover);
