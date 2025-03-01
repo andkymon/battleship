@@ -210,6 +210,11 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+const rotateButton = document.rquerySelector("#rotate");
+rotateButton.addEventListener("click", () => {
+  isVertical = !isVertical;
+});
+
 // Reset hovered square to null when pointer is outside grid
 grid.addEventListener("mouseleave", () => {
   hoveredRowIndex = null;

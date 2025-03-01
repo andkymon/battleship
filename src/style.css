@@ -157,6 +157,25 @@ h1 {
 /* Ship placement page */
 #ship-placement-page {
     display: none; /* Enabled after game is started */
+    position: relative;
+}
+
+.game-button#rotate {
+    position: absolute;
+    top: 6%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+    width: 120px;
+    height: 64px;
+}
+
+.game-button#rotate:hover {
+    transform: translate(-50%) scale(1.25);
+}
+
+.game-button#rotate:active {
+    transform: translate(-50%) scale(1);
 }
 
 .direction {
