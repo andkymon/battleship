@@ -210,7 +210,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-const rotateButton = document.rquerySelector("#rotate");
+const rotateButton = document.querySelector("#rotate");
 rotateButton.addEventListener("click", () => {
   isVertical = !isVertical;
 });
